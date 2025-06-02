@@ -33,10 +33,10 @@ class Rule:
         self.variable = variable
         self.options = options
 
-    def generate(self, grammar, rng):
+    def generate(self, grammar, rng_provider):
         weights = [opt.weight for opt in self.options]
-        chosen = rng.choices(self.options, weights = weights, k = 1)[0]
-        yield from chosen.generate(grammar, rng)
+        chosen = rng_provider.choices(self.options, weights)
+        yield from chosen.generate(grammar, rng_provider)
 
 class Grammar:
     def __init__(self, rules):
@@ -44,3 +44,7 @@ class Grammar:
 
     def get_rule(self, name):
         return self.rules[name]
+
+class RealRandomOutcomeProvider:
+    def choices(self, options, weights):
+        return random.choices(options, weights=weights, k=1)[0]
