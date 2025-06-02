@@ -22,6 +22,5 @@ def parse_grammar_file(path):
                 options.append(Option(weight, symbols))
                 i += 1
             rules[var_name] = Rule(var_name, options)
-            i += 1
-
-        return rules
+        i += 1
+    return rules
