@@ -1,3 +1,8 @@
+"""
+test_parse_grammar_file tests parse_grammar_file and determines if grammar
+text files are being parsed correctly and returned dictionaries and Grammar
+classes using these dictionaries have correct attributes.
+"""
 import tempfile
 import unittest
 from pathlib import Path
