@@ -1,25 +1,27 @@
+from grammar_classes import VariableSymbol, TerminalSymbol, Option, Rule
 
 def parse_grammar_file(path):
-    grammar = {}
+    rules = {}
     with open(path, "r") as f:
         lines = [line.strip() for line in f]
 
     i = 0
     while i < len(lines):
         if lines[i] == '{':
-            i += 1
-            rule_name = lines[i]
-            i += 1
+            var_name = lines[i + 1]
+            i += 2
             options = []
 
             while lines[i] != '}':
-                parts = lines[i].split()
-                weight = int(parts[0])
-                symbols = parts[1:]
-                options.append((weight, symbols))
+                weight_str, *symbols_str = lines[i].split()
+                weight = int(weight_str)
+                symbols = [
+                    VariableSymbol(symbol[1:-1]) if symbol.startswith("[") and symbol.endswith("]")
+                    else TerminalSymbol(symbol) for symbol in symbols_str
+                ]
+                options.append(Option(weight, symbols))
                 i += 1
+            rules[var_name] = Rule(var_name, options)
+            i += 1
 
-            grammar[rule_name] = options
-        i+= 1
-
-    return grammar
+        return rules
