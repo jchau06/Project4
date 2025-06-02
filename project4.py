@@ -2,7 +2,7 @@
 #
 # ICS 33 Spring 2025
 # Project 4: Still Looking for Something
-from read_file import parse_grammar_file
+from parse_grammar_file import parse_grammar_file
 
 
 def main() -> None:

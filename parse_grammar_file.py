@@ -1,6 +1,4 @@
 
-from pathlib import Path
-
 def parse_grammar_file(path):
     grammar = {}
     with open(path, "r") as f:
