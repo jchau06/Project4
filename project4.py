@@ -2,6 +2,7 @@
 #
 # ICS 33 Spring 2025
 # Project 4: Still Looking for Something
+import random
 from parse_grammar_file import parse_grammar_file
 from grammar_classes import Grammar
 
@@ -14,16 +15,13 @@ def main() -> None:
     rules_dict = parse_grammar_file(grammar_file_path)
     grammar = Grammar(rules_dict)
 
+    real_rng = random
 
     for i in range(sentence_count):
         start_rule = grammar.get_rule(start_variable)
-
-        symbols_generator = start_rule.generate(grammar)
-
+        symbols_generator = start_rule.generate(grammar, real_rng)
         sentence_symbols = list(symbols_generator)
-
         sentence = " ".join(sentence_symbols)
-
         print(sentence)
 
 
